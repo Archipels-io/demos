@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Signup with SSI Wallet</title>
+    <link href="https://fonts.googleapis.com/css?family=Heebo:400,700|Oxygen:700" rel="stylesheet">
+    <link rel="stylesheet" href="<%= basePath %>/css/style.css">
+    <script src="https://unpkg.com/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+</head>
+<body class="is-boxed has-animations">
+    <div class="body-wrap boxed-container">
+        <header class="site-header text-light">
+            <div class="container">
+                <div class="site-header-inner">
+                    <div class="brand header-brand">
+                        <h1 class="m-0">
+                            <a href="#">
+                                <img class="header-logo-image" src="<%= basePath %>/images/logo.svg" alt="Logo">
+                            </a>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <section class="hero text-center text-light">
+                <div class="hero-bg"></div>
+                <div class="hero-particles-container">
+                    <canvas id="hero-particles"></canvas>
+                </div>
+                <div class="container-sm">
+                    <div class="hero-inner">
+                        <div class="hero-copy">
+                            <% if (mode === 'secured'){ %>
+                                <h1 class="hero-title mt-0">Great ! You are logged-in</h1>
+                                <p class="hero-paragraph">as <%= id %></p>
+                                <p class="hero-paragraph">In a real app, just put this token as a Authentication header
+                                    :</p>
+                                <p class="hero-paragraph" style="word-wrap:break-word"><%= accessToken %></p>
+                            <% } else { %>
+                                <h1 class="hero-title mt-0">Authenticate your users in an SSI way</h1>
+                                <p class="hero-paragraph">Interested in trying it out? Find out how to create your own digital wallet and store your own reusable verifiable credentials.</p>
+                                <div class="hero-cta">
+                                    <a class="button button-primary button-wide-mobile"
+                                       href="<%= signupLink %>">Register</a>
+                                    <a class="button button-primary button-wide-mobile" style="margin-top: 16px"
+                                       href="<%= signinLink %>">Sign in</a>
+                                </div>
+                            <% } %>
+                        </div>
+                        <div class="mockup-container">
+                            <img class="device-mockup" src="<%= basePath %>/images/signed-in-attestation.png" alt="iPhone Hero">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="features-extended section">
+                <div class="features-extended-inner section-inner">
+                    <div class="features-extended-wrap">
+                        <div class="container">
+                            <div class="feature-extended">
+                                <div class="feature-extended-image">
+                                    <img class="device-mockup is-revealing" src="<%= basePath %>/images/presentation-request.png"
+                                         alt="iPhone Feature 01">
+                                </div>
+                                <div class="feature-extended-body is-revealing">
+                                    <h3 class="mt-0 mb-16">Request all the attestations you need.</h3>
+                                    <p class="m-0">Ask once, verify everywhere. If already hold,
+                                        it takes 10 seconds for a user to provide it.</p>
+                                </div>
+                            </div>
+                            <div class="feature-extended">
+                                <div class="feature-extended-image">
+                                    <img class="device-mockup is-revealing" src="<%= basePath %>/images/webhook.png"
+                                         alt="iPhone Feature 02">
+                                </div>
+                                <div class="feature-extended-body is-revealing">
+                                    <h3 class="mt-0 mb-16">Easy to integrate.</h3>
+                                    <p class="m-0">Simply register a webhook url and access token to connect your user wallet to your own workflows.</p>
+                                </div>
+                            </div>
+                            <div class="feature-extended">
+                                <div class="feature-extended-image">
+                                    <img class="device-mockup is-revealing" src="<%= basePath %>/images/discover.png"
+                                         alt="iPhone Feature 03">
+                                </div>
+                                <div class="feature-extended-body is-revealing">
+                                    <h3 class="mt-0 mb-16">Attestations catalog.</h3>
+                                    <p class="m-0">Base your workflows on existing schemas, or create your own to suit your needs.</p>
+                                </div>
+                            </div>
+                            <div class="feature-extended">
+                                <div class="feature-extended-image">
+                                    <img class="device-mockup is-revealing" src="<%= basePath %>/images/onboarding.png"
+                                         alt="iPhone Feature 04">
+                                </div>
+                                <div class="feature-extended-body is-revealing">
+                                    <h3 class="mt-0 mb-16">Work with data you can trust.</h3>
+                                    <p class="m-0">Take advantage of cryptography and blockchain to ensure that information is never censored, never altered and always verifiable.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="site-footer">
+            <div class="footer-particles-container">
+                <canvas id="footer-particles"></canvas>
+            </div>
+            <div class="site-footer-top">
+                <section class="cta section text-light">
+                    <div class="container-sm">
+                        <div class="cta-inner section-inner">
+                            <div class="cta-header text-center">
+                                <h2 class="section-title mt-0">Let's move one step deeper ?</h2>
+                                <p class="section-paragraph">This is a demo dedicated landing page, 100% oriented towards in the
+                                    solution provided by Archipels. Feel free to contact us if you need any help</p>
+                                <div class="cta-cta">
+                                    <a class="button button-primary button-wide-mobile"
+                                       href="https://docs-v1.archipels.io/archipels-documentation">Documentation</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="site-footer-bottom">
+                <div class="container">
+                    <div class="site-footer-inner">
+                        <div class="footer-copyright">&copy; 2024 Archipels, all rights reserved</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="<%= basePath %>/js/main.min.js"></script>
+</body>
+</html>
