@@ -66,18 +66,7 @@ The demo is composed of two main steps, the `signup` and `signin`.
 
 ### Signup
 
-```plantuml
-@startuml
-participant Home
-participant Webhook
-participant Archipels
-Home -> Archipels : 1 - signup link
-Archipels -> Webhook: 2 - MessageReceived /signup
-Webhook -> Archipels: 3 - send presentation request [emailAddress]
-Archipels -> Webhook: 4 - PresentationReceived [emailAddress]
-Webhook -> Archipels: 5 - send attestation offer [application + id]
-@enduml
-```
+![Sign up UML diagram](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Archipels-io/demos/main/authentication/signup.iuml)
 
 #### Explanation :
 
@@ -93,17 +82,7 @@ User can accept your attestation offer to add it to his personal wallet for futu
 
 ### Signin
  
-```plantuml
-@startuml
-participant Home
-participant Webhook
-participant Archipels
-Home -> Archipels : 1 - signin link
-Archipels -> Webhook: 2 - MessageReceived /signin
-Webhook -> Archipels: 3 - send presentation request [application + id]
-Archipels -> Webhook: 4 - PresentationReceived [application + id]
-@enduml
-```
+![Sign up UML diagram](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Archipels-io/demos/main/authentication/signin.iuml)
 
 #### Explanation :
 

@@ -1,0 +1,9 @@
+@startuml
+participant Home
+participant Webhook
+participant Archipels
+Home -> Archipels : 1 - signin link
+Archipels -> Webhook: 2 - MessageReceived /signin
+Webhook -> Archipels: 3 - send presentation request [application + id]
+Archipels -> Webhook: 4 - PresentationReceived [application + id]
+@enduml
