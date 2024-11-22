@@ -49,7 +49,7 @@ function generateLink(type, invitation) {
     throw new Error(`Unsupported link type ${type}`);
   }
 
-  return `${ARCHIPELS_APP_URL}/presentation-requests/initialize?message=/${type}&invitation=${invitation}`;
+  return `${ARCHIPELS_APP_URL}/presentation-requests/initialize?message=/${type}&invitation=${invitation}&onboarding=quick`;
 }
 
 /**
