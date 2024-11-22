@@ -6,9 +6,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 
-EXPOSE 5001
-ENV PORT=5001
-
 COPY public/ ./public
 COPY views/ ./views
 COPY src/ ./src
