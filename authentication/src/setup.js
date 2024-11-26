@@ -46,16 +46,16 @@ async function getWalletDid() {
         console.log("Using provided wallet DID:", WALLET_DID);
         return WALLET_DID;
     }
-    const { data } = await axios.get('/wallets').catch((error) => {
+    const { data: { results } } = await axios.get('/wallets').catch((error) => {
         console.error(error.message);
         throw new Error("Could not fetch wallet DID");
     });
-    if (data.length === 0) {
+    if (results.length === 0) {
         throw new Error("Could not find a wallet with the provided access token");
-    } if (data.length > 1) {
+    } if (results.length > 1) {
         throw new Error("Found multiple wallets with the access token. Please set the WALLET_DID property");
     }
-    const walletDids = data[0].dids;
+    const walletDids = results[0].dids;
     const walletDid = walletDids[0]; // Any DID for the wallet should work
     console.log("Found wallet DID:", walletDid);
     axios.defaults.headers.wallet = walletDid;

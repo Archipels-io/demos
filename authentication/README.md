@@ -8,6 +8,7 @@ By leveraging decentralized identity wallets, you can provide a seamless and sec
 
 Check out the demo live on our website: [demo.archipels.io/authentication](https://demo.archipels.io/authentication)!
 
+https://github.com/user-attachments/assets/e05fc176-7dad-4dac-a001-8f21b6d74a82
 
 ## Setting it up locally
 
