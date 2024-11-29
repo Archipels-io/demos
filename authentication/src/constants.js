@@ -1,6 +1,7 @@
 // Environment variables to change
 const ACCESS_TOKEN = process.env.ACCESS_TOKEN; // Can be found in your profile settings
 const APP_URL = process.env.APP_URL; // Your app URL. When running locally, replace with the URL ngrok (or similar) provided
+const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET || "demo"; // The token you specified when creating the webhook.
 
 // Additional configuration (not necessary the first time)
 const ARCHIPELS_API_URL = 'https://app-api.archipels.io'; // Change if you used another environment for your wallet
@@ -13,7 +14,6 @@ const JWT_SECRET = 'jwt_secret'; // Be sure to change this in a production envir
 const DEMO_SCHEMA_ID = null; // If you want to issue attestations with your own schema, specify the id here
 const DEMO_SCHEMA_NAME = "Demo"; // If the schema is not found by id, this name will be used to find/create it
 const WALLET_DID = null; // Choose your wallet if multiple exist on your account
-const WEBHOOK_SECRET = 'demo';
 
 module.exports = {
   APP_URL,
