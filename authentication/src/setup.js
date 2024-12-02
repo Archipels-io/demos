@@ -44,6 +44,7 @@ async function setupDefaultWallet() {
 async function getWalletDid() {
     if (WALLET_DID != null) {
         console.log("Using provided wallet DID:", WALLET_DID);
+        axios.defaults.headers.wallet = WALLET_DID;
         return WALLET_DID;
     }
     const { data: { results } } = await axios.get('/wallets').catch((error) => {
