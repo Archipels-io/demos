@@ -4,25 +4,76 @@ This example is a **modern**, **secure**, and **privacy-focused** authentication
 
 By leveraging decentralized identity wallets, you can provide a seamless and secure way for users to authenticate across websites and apps without relying on centralized databases for storing personal credentials.
 
-## Try it out!
+# Try it out!
 
 Check out the demo live on our website: [demo.archipels.io/authentication](https://demo.archipels.io/authentication)!
 
 https://github.com/user-attachments/assets/e05fc176-7dad-4dac-a001-8f21b6d74a82
 
-## Setting it up locally
+# Setting it up locally
 
 This section will help you set up a website where users can sign up and log in without using a password.
 
-By modifying the source code, you can then easily integrate this functionality on a website of your own.
+You can either [integrate the functionality on your own website](#on-your-own-website) (recommended) or [run the demo locally](#run-the-demo-locally) to explore the code (easier).
 
 If you're interested in the benefits provided by this approach, as well as some more technical background, scroll down to [the appendix](#key-benefits). If you prefer seeing code in action to understand it, keep on reading!
 
+## On your own website
+
+1. Before getting started, follow the [Common steps guide](../COMMON_STEPS.md) to:
+- Set up an Achipels wallet with an `ACCESS_TOKEN` ([wallet](../COMMON_STEPS.md#create-a-wallet), [access token](../COMMON_STEPS.md#create-an-access-token))
+- Set up a webhook on your wallet ([link](../COMMON_STEPS.md#create-a-webhook))
+- Generate an invitation link ([link](../COMMON_STEPS.md#generate-an-invitation-link))
+
+2. Next, you need to implement handlers in your backend to handle the signup and signin messages from your users. You can reuse the code in `src/helpers.js` as a reference.
+
+3. Finally, you need to add the signup and signin links to your website. These links have the following format (don't forget to replace `${type}` by `signup` or `signin` and `${invitation}` by the invitation link you received):
+
+```
+https://app-api.archipels.io/presentation-requests/initialize?message=/${type}&invitation=${invitation}&onboarding=quick
+```
+
+That's it, you're all set up! 🎉
+If you want to learn more about the different steps, keep on reading!
+
+### Workflow
+
+The demo is composed of two main steps, the `signup` and `signin`.
+
+#### Signup
+
+![Sign up UML diagram](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Archipels-io/demos/main/authentication/signup.iuml)
+
+1. A user clicks on your signup invitation link and is redirected to our web application
+2. You receive a message to start the signup process
+3. Send them a request to present a verified email address
+4. You receive a presentation containing the requested data
+5. Send them back an attestation offer with your custom schema
+
+> **Important :** when you receive a presentation, validate each presentation attribute issuer to ensure that you can trust the source of the data (see the `validatePresentationIssuer` method in `helpers.js`).
+
+Users can accept your attestation offer to add it to their personal wallet for a future signin process
+
+#### Signin
+ 
+![Sign up UML diagram](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Archipels-io/demos/main/authentication/signin.iuml)
+
+1. A user clicks on your signin invitation link and is redirected to our web application
+2. You receive a message to start the signin process
+3. Send them a request to present a verified id and application name
+4. You receive a presentation containing the requested data
+
+> **Important :** when you receive a presentation, validate each presentation attribute issuer to ensure that you can trust the source of the data (during signin, it should be you!)
+
+You can then do whatever you want, validate the email, generate a private access token to authenticate the user on your own API, etc...
+
+## Run the demo locally
+
 ### Getting started
 
-First, make sure you've created a wallet to represent your website when users try to authenticate on it. To do this, you can follow the [Getting started guide](../README.md).
+First, make sure you've created a wallet to represent your website when users try to authenticate on it. To do this, you can follow the [Common steps guide](../COMMON_STEPS.md#create-a-wallet).
 
-Before going further, you should have a wallet and an `ACCESS_TOKEN` to access it.
+Also don't forget to create an `ACCESS_TOKEN` to access your wallet (see [this section in the guide](../COMMON_STEPS.md#create-an-access-token)).
 
 Now, clone this repository and move to the next step!
 
@@ -61,99 +112,7 @@ You may have to use another browser or clear your cookies to simulate a distinct
 
 Alternatively, you can also use the provided Dockerfile to run the demo in a container.
 
-## Workflow
-
-The demo is composed of two main steps, the `signup` and `signin`.
-
-### Signup
-
-![Sign up UML diagram](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Archipels-io/demos/main/authentication/signup.iuml)
-
-#### Explanation :
-
-1. A user click on your signup invitation link and is redirected to our web application
-2. You receive a message to start the signup process
-3. Send him a request to present a verified email address
-4. You receive a presentation containing the requested data
-5. Send him back an attestation offer with your custom schema
-
-> **Important :** when you receive a presentation, validate each presentation attribute issuer to ensure that you can trust the source of the data (Cf. method `validatePresentationIssuer` in helpers).
-
-User can accept your attestation offer to add it to his personal wallet for future signin process
-
-### Signin
- 
-![Sign up UML diagram](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Archipels-io/demos/main/authentication/signin.iuml)
-
-#### Explanation :
-
-1. A user click on your signin invitation link and is redirected to our web application
-2. You receive a message to start the signin process
-3. Send him a request to present a verified id and application name (Cf. create custom schema)
-4. You receive a presentation containing the requested data
-
-> **Important :** when you receive a presentation, validate each presentation attribute issuer to ensure that you can trust the source of the data (Cf. method `validatePresentationIssuer` in helpers).
-
-You can now do whatever you want, validate the email, generate a private access token to authenticate the user on your own api, etc...
-
-### Feeling lost?
-
-If you're not familiar with SSI (Self-Sovereign Identity), you might feel a little overwhelmed with unknown terms.
-That's normal! It represents a paradigm shift away from centralized identity (our ID cards are delivered by a central state) and IDPs (IDentity Providers, intermediaries like Google or Facebook we trust with our personal information when we log in without creating an account on a website).
-
-But don't worry, the basic concepts are simple enough to grasp.
-To authenticate without a password and without intermediaries, you establish a secure connection between your app's wallet and the wallet of your user.
-
-> A wallet is, like in real life, a collection of stuff (only digital).
-
-In this case, when your user first signs in, you first request an email attestation the user has in their wallet. We call them the _holder_ and you the _verifier_. _Attestations_, or _verifiable credentials_ are what holders hold in their wallets.
-
-Most likely, the user already has one in this case. If not, they can request one from an _issuer_ (Archipels for example).
-
-Once they present it, you (the verifier) check that you trust the issuer. If you do, you now know that your user's email address is valid.
-
-![Triangle of Trust](https://upload.wikimedia.org/wikipedia/commons/5/51/VC_triangle_of_Trust.svg)
-
-You then issue another attestation, which we call the demo attestation in this example. This is what your user will use to authenticate themselves. You become an issuer yourself.
-
-When they try to sign in again, you take the role of verifier and ask for the attestation you issued. If the user provides it, they're logged in! You can then handle the user's account as you would otherwise.
-
-When the user presents an attestation, the protocols behind guarantee that it has not been falsified, has not been tampered with and has indeed been issued by the issuer it claims. The technology allows us to think about the only question that really matters:
-
-> Do I trust the issuer, that is, do I trust the human behind it?
-
-For more benefits of this new approach, see the [appendix](#key-benefits).
-
-What we now need is a way of requesting an attestations. To do this, we use _schemas_, which are simply attestation blueprints. They indicate which attributes it should contain:
-
-```json
-// (Archipel's) email schema
-{
-  "id": "dfe18fd1-182c-45f5-8d84-a200994e5ac9",
-  "schemaId": "QuS72Sdp6eDD2jTDz43XoU:2:Email attestation:1.0",
-  "name": "Email attestation",
-  "attributes": [
-    {
-      "name": "emailAddress",
-      "description": "Email"
-    }
-  ],
-  // ...
-}
-```
-
-Anyone can create schemas for others to issue and request attestations. This gives holders tremendous power, leading to a much more decentralized structure.
-
-One final concept we need to understand are _connections_. This is the way you connect with all the actors. To initiate a secure communication channel between you and your user, we use invitations, which you can add to your website. When a user clicks one one such invitation, Archipels creates a secure connection between your wallets. It is then used to issue and verify attestations.
-
-That's it! With this, you should understand all the building blocks of this example. If you want to dig deeper, these resources are great introductions to the subject (taken from this [great repo](https://github.com/animo/awesome-self-sovereign-identity)):
-- [Self-Sovereign Identity (SSI) Explained](https://www.youtube.com/watch?v=kJAapPG_jBY) (video)
-- [Self-Sovereign Identity: Decentralized digital identity and verifiable credentials](https://livebook.manning.com/book/self-sovereign-identity/welcome/) (book)
-- [Introduction to Self-Sovereign Identity](https://walt.id/white-paper/self-sovereign-identity-ssi) (article)
-
-Of course, you can use any other wallet alternative that uses the same protocol instead of Archipels. But why not use one of the most feature-rich options, which actively works with many industry giants and most SSI actors, while also being completely free for individual wallets? Discover more on [our website](https://www.archipels.io/)!
-
-## Want to go further?
+# Want to go further?
 
 If you want to dig deeper in this example, here are a few steps you can take:
 1. [Ask for a different attestation](#ask-for-a-different-attestation)
@@ -161,11 +120,11 @@ If you want to dig deeper in this example, here are a few steps you can take:
 3. [Create a custom schema](#create-a-custom-schema)
 4. [Check out our docs](#check-out-our-docs)
 
-### Ask for a different attestation
+## Ask for a different attestation
 
-To ask the user for a different attestation, simply modify the `ATTESTATION_SCHEMA_ID` to choose the schema you want to use. You can also [create your own schema](#create-a-custom-schema). If you don't want to ask the user for an attestation on signup, simply remove the checks `index.js` and `helpers.js`.
+To ask the user for a different attestation, simply modify the `ATTESTATION_SCHEMA_ID` to choose the schema you want to use. You can also [create your own schema](#create-a-custom-schema). If you don't want to ask the user for an attestation on signup, simply remove the checks in `index.js` and `helpers.js`.
 
-### Discover how invitations are resolved
+## Discover how invitations are resolved
 
 When calling the /connections/create-invitation, you receive an invitation, encoded as a JWT token. If you want to sent it to your users without forcing them to make API calls, simply embed it in a link:
 
@@ -173,7 +132,7 @@ https://app.archipels.io/presentation-requests/initialize?message=${message}&inv
 
 After clicking the link, the user will be redirected to select a wallet they want to use (or create one if they don't have one yet). Once authenticated, it will send the message you specified back to the owner (you). In this app, we use it to send /signup and /signin commands in the chat, but you can customize it!
 
-### Create a custom schema
+## Create a custom schema
 
 Use our api to create a schema :
 
@@ -215,7 +174,7 @@ Then, in `src/constants.js`:
 - If you want to use this schema to represent your users, set the value of `DEMO_SCHEMA_ID` to your new schema id. You will also need to modify the code in `helpers.js` to generate the attestation correctly.
 - If you want to use this schema for validating users before sign in, set the `ATTESTATION_SCHEMA_ID` property. However, note that you are most likely the only verifier who will agree to deliver such attestations, which does defeat the purpose.
 
-### Check out our docs
+## Check out our docs
 
 For a more general reference about our APIs, make sure to check out our [documentation](https://docs-v1.archipels.io/archipels-documentation)!
 

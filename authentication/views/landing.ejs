@@ -7,6 +7,27 @@
     <title>Signup with SSI Wallet</title>
     <link href="https://fonts.googleapis.com/css?family=Heebo:400,700|Oxygen:700" rel="stylesheet">
     <link rel="stylesheet" href="<%= basePath %>/css/style.css">
+    <style>
+        .fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: #4950F6;
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .fab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+    </style>
     <script src="https://unpkg.com/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
 </head>
 <body class="is-boxed has-animations">
@@ -136,6 +157,9 @@
             </div>
         </footer>
     </div>
+    <a href="https://github.com/Archipels-io/demos/tree/main/authentication" class="fab" title="Check out the source code" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" width="24" height="24" style="filter: invert(1);">
+    </a>
     <script src="<%= basePath %>/js/main.min.js"></script>
 </body>
 </html>
