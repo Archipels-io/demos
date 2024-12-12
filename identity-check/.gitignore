@@ -1,0 +1,7 @@
+next-frontend/node_modules
+next-frontend/.next/
+next-frontend/out
+next-frontend/next-env.d.ts
+
+
+.env

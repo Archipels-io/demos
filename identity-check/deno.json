@@ -1,0 +1,10 @@
+{
+  "tasks": {
+    "build-frontend": "cd next-frontend && npm install && npm run build",
+    "dev": "deno run --env-file='.env' -A --watch='.' src/index.ts",
+    "start": "deno run -A src/index.ts"
+  },
+  "imports": {
+    "jwt": "npm:jwt@^0.2.0"
+  }
+}

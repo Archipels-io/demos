@@ -1,0 +1,10 @@
+@startuml
+participant Home
+participant Webhook
+participant Archipels
+Home -> Archipels : 1 - verify-identity link
+Archipels -> Webhook: 2 - MessageReceived /verify-identity
+Webhook -> Archipels: 3 - send presentation request [firstName + lastName]
+Archipels -> Webhook: 4 - PresentationReceived [firstName + lastName]
+Archipels -> Home: 5 - redirect to secured page
+@enduml
