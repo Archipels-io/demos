@@ -10,6 +10,8 @@ Check out the demo live on our website: [demo.archipels.io/identity-check](https
 
 This video shows the demo in action:
 
+https://github.com/user-attachments/assets/175bd215-d315-4ee5-a986-2cb697b48897
+
 ## First time interacting with SSI concepts?
 
 If you're a complete beginner to the topic, we recommend you to read the [_Feeling lost?_ section in the main README](../README.md#feeling-lost) first.
