@@ -10,7 +10,7 @@ Check out the demo live on our website: [demo.archipels.io/legal-age-check](http
 
 This video shows the demo in action:
 
-https://github.com/user-attachments/assets/175bd215-d315-4ee5-a986-2cb697b48897
+https://github.com/user-attachments/assets/9f3473ea-4700-460d-8e97-e1104259c9ef
 
 ## First time interacting with SSI concepts?
 

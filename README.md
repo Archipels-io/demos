@@ -48,6 +48,7 @@ Go to [Settings > Access tokens](https://app.archipels.io/settings-access-token)
 🏆 That's it, you're all set up! Now you can explore any example you want! Follow the directory names or use the list below to choose:
 1. [Authentication](./authentication/README.md) - Start with this one if you're new to Self-Sovereign Identity or Archipels!
 2. [Identity Check](./identity-check/README.md) - Want to verify the identity of your users?
+3. [Legal Age Check](./legal-age-check/README.md) - Want to verify if your users are of legal age?
 
 ### Common steps
 
